@@ -65,8 +65,12 @@ class ConfessionItem extends StatelessWidget {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 20),
               decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(10.0)),
+                  color: Colors.pink.withOpacity(0.04),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.black.withOpacity(0.3),
+                  ),
+                  borderRadius: BorderRadius.circular(25.0)),
               child: Text(
                 "Write a comment...",
                 style: TextStyle(color: Colors.grey),

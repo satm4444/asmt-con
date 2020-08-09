@@ -7,23 +7,23 @@ class SignupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              height: deviceSize.height,
-              width: deviceSize.width,
-              child: Image.asset(
-                "assets/back.jpg",
-                fit: BoxFit.cover,
-              ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            height: deviceSize.height,
+            width: deviceSize.width,
+            child: Image.asset(
+              "assets/back.jpg",
+              fit: BoxFit.cover,
             ),
-            Container(
-              height: deviceSize.height,
-              width: deviceSize.width,
-              color: Colors.white.withOpacity(0),
-            ),
-            Column(
+          ),
+          Container(
+            height: deviceSize.height,
+            width: deviceSize.width,
+            color: Colors.white.withOpacity(0),
+          ),
+          SingleChildScrollView(
+            child: Column(
               children: <Widget>[
                 Container(
                     height: deviceSize.height * 0.3, width: deviceSize.width),
@@ -187,18 +187,17 @@ class SignupScreen extends StatelessWidget {
                 ),
               ],
             ),
-            Positioned(
-                left: 10,
-                top: 30,
-                child: IconButton(
-                    icon: Icon(CupertinoIcons.back,
-                        size: 30, color: Colors.white),
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                          context, '/opening_screen');
-                    })),
-          ],
-        ),
+          ),
+          Positioned(
+              left: 10,
+              top: 30,
+              child: IconButton(
+                  icon:
+                      Icon(CupertinoIcons.back, size: 30, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/opening_screen');
+                  })),
+        ],
       ),
     );
   }
