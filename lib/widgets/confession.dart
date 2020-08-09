@@ -21,9 +21,9 @@ class Confession extends StatelessWidget {
           padding: EdgeInsets.all(12),
           margin: EdgeInsets.only(bottom: 10, top: 5, left: 10, right: 10),
           decoration: BoxDecoration(
-              color:
-                  //Color(0xffE30045).withOpacity(0.2),
-                  Color(0XFFF0EFF0),
+              color: Colors.white,
+              //Color(0xffE30045).withOpacity(0.2),
+              //Color(0XFFF0EFF0),
               borderRadius: BorderRadius.circular(15.0)),
           child: ConfessionItem(
             id: confession[index].id,
