@@ -1,7 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
-class OpeningScreen extends StatelessWidget {
+class OpeningScreen extends StatefulWidget {
+  @override
+  _OpeningScreenState createState() => _OpeningScreenState();
+}
+
+class _OpeningScreenState extends State<OpeningScreen> {
+//Facebook login
+
+  FacebookLogin facebookLogin = FacebookLogin();
+
   @override
   Widget build(BuildContext context) {
     var deviceSize = MediaQuery.of(context).size;
@@ -31,38 +43,71 @@ class OpeningScreen extends StatelessWidget {
                         SizedBox(height: 28),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                          child: Container(
-                            height: deviceSize.height * 0.09,
-                            width: deviceSize.width,
-                            color: Colors.blue,
-                            //Color(0xff1976D2),
-                            child: Row(
-                              children: <Widget>[
-                                SizedBox(width: 25),
-                                Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 10.0,
-                                      bottom: 10,
-                                      top: 10,
+                          child: InkWell(
+                            onTap: () {
+                              facebookLogin.logIn(['email']).then((result) {
+                                switch (result.status) {
+                                  case FacebookLoginStatus.loggedIn:
+                                    FirebaseAuth.instance
+                                        .signInWithCredential(
+                                            FacebookAuthProvider.getCredential(
+                                                accessToken:
+                                                    result.accessToken.token))
+                                        .then((signedInUser) {
+                                      print(
+                                          'Signed User is ${signedInUser.user.displayName}');
+                                      Navigator.of(context)
+                                          .pushNamedAndRemoveUntil(
+                                              '/bottombar_screen',
+                                              (Route<dynamic> route) => false);
+                                    }).catchError((e) {
+                                      print(e);
+                                    });
+                                    break;
+                                  case FacebookLoginStatus.cancelledByUser:
+                                    // TODO: Handle this case.
+                                    break;
+                                  case FacebookLoginStatus.error:
+                                    // TODO: Handle this case.
+                                    break;
+                                }
+                              }).catchError((e) {
+                                print(e);
+                              });
+                            },
+                            child: Container(
+                              height: deviceSize.height * 0.09,
+                              width: deviceSize.width,
+                              color: Colors.blue,
+                              //Color(0xff1976D2),
+                              child: Row(
+                                children: <Widget>[
+                                  SizedBox(width: 25),
+                                  Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 10.0,
+                                        bottom: 10,
+                                        top: 10,
+                                      ),
+                                      child: Image.asset(
+                                          "assets/icons/facebook.png"),
                                     ),
-                                    child: Image.asset(
-                                        "assets/icons/facebook.png"),
                                   ),
-                                ),
-                                SizedBox(width: 20),
-                                Container(
-                                  child: Center(
-                                    child: Text(
-                                      "JOIN US WITH FACEBOOK",
-                                      style: GoogleFonts.ubuntu(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold),
+                                  SizedBox(width: 20),
+                                  Container(
+                                    child: Center(
+                                      child: Text(
+                                        "JOIN US WITH FACEBOOK",
+                                        style: GoogleFonts.ubuntu(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),

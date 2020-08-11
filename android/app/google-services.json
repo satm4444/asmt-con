@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "710875763235",
+    "firebase_url": "https://confession-ff8df.firebaseio.com",
+    "project_id": "confession-ff8df",
+    "storage_bucket": "confession-ff8df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710875763235:android:2419a7fb7cee666139d796",
+        "android_client_info": {
+          "package_name": "com.asmt.confession"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710875763235-r9vkens1fpa9qv2nd9v0ijnc94kg3fsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqblxbGCvPrdL8UN8tZ1CVpCJNGMSMqfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710875763235-r9vkens1fpa9qv2nd9v0ijnc94kg3fsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
