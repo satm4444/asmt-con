@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>710875763235-t873u7h0o0vqf0epq27hfj2q5fc8vhac.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.710875763235-t873u7h0o0vqf0epq27hfj2q5fc8vhac</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDaOVPqlVoDIHN1MabXrjL9_chPTXB38Ts</string>
+	<key>GCM_SENDER_ID</key>
+	<string>710875763235</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.asmt.confession</string>
+	<key>PROJECT_ID</key>
+	<string>confession-ff8df</string>
+	<key>STORAGE_BUCKET</key>
+	<string>confession-ff8df.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:710875763235:ios:9a7db603cdf469fc39d796</string>
+	<key>DATABASE_URL</key>
+	<string>https://confession-ff8df.firebaseio.com</string>
+</dict>
+</plist>

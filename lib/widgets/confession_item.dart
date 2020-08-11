@@ -65,10 +65,10 @@ class ConfessionItem extends StatelessWidget {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.only(left: 20),
               decoration: BoxDecoration(
-                  color: Colors.pink.withOpacity(0.04),
+                  color: Colors.pink.withOpacity(0.02),
                   border: Border.all(
                     width: 1,
-                    color: Colors.black.withOpacity(0.3),
+                    color: Colors.black.withOpacity(0.2),
                   ),
                   borderRadius: BorderRadius.circular(25.0)),
               child: Text(
