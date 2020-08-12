@@ -1,6 +1,6 @@
 import 'package:confession/widgets/confession.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,9 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Color(0XFFF0EFF0),
         actions: <Widget>[
-          IconButton(
-              icon: SvgPicture.asset("assets/icons/search.svg"),
-              onPressed: () {})
+          IconButton(icon: Icon(Icons.search), onPressed: () {})
         ],
         elevation: 0,
         title: RichText(

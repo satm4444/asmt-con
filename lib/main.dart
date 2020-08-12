@@ -1,5 +1,6 @@
 import 'package:confession/provider/confession_provider.dart';
 import 'package:confession/screens/confession_detail_screen.dart';
+import 'package:confession/screens/home_screen.dart';
 
 import 'package:confession/screens/login_screen.dart';
 import 'package:confession/screens/opening_screen.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         title: "ASMT Confession",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.white),
-        home: OpeningScreen(),
+        home: HomeScreen(),
+        // OpeningScreen(),
         routes: {
           ConfessionDetailScreen.routeName: (ctx) => ConfessionDetailScreen(),
           "/signup_screen": (ctx) => SignupScreen(),

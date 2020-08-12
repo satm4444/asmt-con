@@ -1,4 +1,3 @@
-import 'package:confession/screens/bottom_bar_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +21,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
 
   Future<void> resetPassword() async {
     FirebaseAuth.instance.sendPasswordResetEmail(email: _email).then((email) {
-      return showCupertinoDialog(
+      return showDialog(
           context: context,
           builder: (ctx) {
-            return CupertinoAlertDialog(
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
               title: Text("Email Send Successfully"),
               actions: <Widget>[
-                CupertinoDialogAction(
+                FlatButton(
                     child: Text("OK"),
                     onPressed: () {
                       Navigator.pop(context);
@@ -37,13 +39,16 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             );
           });
     }).catchError((error) {
-      return showCupertinoDialog(
+      return showDialog(
           context: context,
           builder: (ctx) {
-            return CupertinoAlertDialog(
-              title: Text("Unable to send password reset mail"),
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              title: Text("Unable to send email. Please Try Again !"),
               actions: <Widget>[
-                CupertinoDialogAction(
+                FlatButton(
                     child: Text("OK"),
                     onPressed: () {
                       Navigator.pop(context);
@@ -88,6 +93,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             letterSpacing: 1,
                             fontSize: 24,
                             fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 60,
+                    width: double.infinity,
+                    // color: Colors.green,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                        child: Text(
+                          "➤ An email will be sent to the email address you enter below, through which you will be able to reset the password.  ",
+                          style: GoogleFonts.ubuntu(
+                              color: Colors.grey,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ),
                     ),
                   ),
@@ -149,7 +171,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               child: FlatButton(
                                 onPressed: checkLogin,
                                 child: Text(
-                                  "Send Mail",
+                                  "Get mail",
                                   style: GoogleFonts.ubuntu(
                                       color: Colors.white,
                                       fontSize: 14,

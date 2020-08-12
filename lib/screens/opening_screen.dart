@@ -64,10 +64,10 @@ class _OpeningScreenState extends State<OpeningScreen> {
                               //       });
                               //       break;
                               //     case FacebookLoginStatus.cancelledByUser:
-                              //       // TODO: Handle this case.
+                              //       //
                               //       break;
                               //     case FacebookLoginStatus.error:
-                              //       // TODO: Handle this case.
+                              //       //
                               //       break;
                               //   }
                               // }).catchError((e) {
