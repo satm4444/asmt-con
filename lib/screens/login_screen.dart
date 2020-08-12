@@ -1,4 +1,5 @@
 import 'package:confession/screens/bottom_bar_screen.dart';
+import 'package:confession/screens/reset_password_screen.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,7 +17,38 @@ class _LoginScreenState extends State<LoginScreen> {
   final _form = GlobalKey<FormState>();
   String _email;
   String _password;
+  Future<void> checkVerification() async {
+    print("Check Verification");
+    var user = await FirebaseAuth.instance.currentUser();
+    setState(() {
+      _isLoading = false;
+    });
+    if (user.isEmailVerified) {
+      print("Logging In");
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/bottombar_screen', (Route<dynamic> route) => false);
+    } else if (!user.isEmailVerified) {
+      return showCupertinoDialog(
+          context: context,
+          builder: (ctx) {
+            return CupertinoAlertDialog(
+              title: Text("Verify your Email Address First"),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ],
+            );
+          });
+    }
+  }
+
   Future<void> logIn() async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       FirebaseUser user = await _firebaseAuth
           .signInWithEmailAndPassword(email: _email, password: _password)
@@ -87,13 +119,48 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void checkLogin() {
-    setState(() {
-      _isLoading = true;
-    });
     if (_form.currentState.validate()) {
       _form.currentState.save();
       logIn();
     }
+  }
+
+  Future<void> resetPassword() async {
+    var emailAddress = "nabindangol2@gmail.com";
+
+    FirebaseAuth.instance
+        .sendPasswordResetEmail(email: emailAddress)
+        .then((email) {
+      return showCupertinoDialog(
+          context: context,
+          builder: (ctx) {
+            return CupertinoAlertDialog(
+              title: Text("Email Send Successfully"),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ],
+            );
+          });
+    }).catchError((error) {
+      return showCupertinoDialog(
+          context: context,
+          builder: (ctx) {
+            return CupertinoAlertDialog(
+              title: Text("Unable to send password reset mail"),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ],
+            );
+          });
+    });
   }
 
   @override
@@ -255,7 +322,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 height: 20,
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, ResetPasswordScreen.routeName);
+                                },
                                 child: Text(
                                   "Forget your password?",
                                   style: GoogleFonts.chilanka(

@@ -3,6 +3,7 @@ import 'package:confession/screens/confession_detail_screen.dart';
 
 import 'package:confession/screens/login_screen.dart';
 import 'package:confession/screens/opening_screen.dart';
+import 'package:confession/screens/reset_password_screen.dart';
 import 'package:confession/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           "/login_screen": (ctx) => LoginScreen(),
           '/opening_screen': (ctx) => OpeningScreen(),
           '/bottombar_screen': (ctx) => BottomBarScreen(),
+          ResetPasswordScreen.routeName: (ctx) => ResetPasswordScreen(),
         },
       ),
     );

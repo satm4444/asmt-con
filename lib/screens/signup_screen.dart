@@ -18,37 +18,43 @@ class _SignupScreenState extends State<SignupScreen> {
   String _email;
   String _password;
   String _name;
-//  Future<void> sendVerification(FirebaseUser user) async{
-//    try{
-//      await user.sendEmailVerification();
-//
-
-//    }catch(error){
-//      CupertinoAlertDialog(
-//        title: Text("An Error Occurred while sending email verification"),
-//        actions: <Widget>[
-//          CupertinoDialogAction(child: Text("OK"),onPressed:() {Navigator.pop(context);})
-//        ],
-//      );
-//    }
-//  }
-  Future<void> signUp() async {
-    setState(() {
-      _isLoading = true;
+  Future<void> verification() async {
+    var user = await FirebaseAuth.instance.currentUser();
+    user.sendEmailVerification().then((push) {
+      setState(() {
+        _isLoading = false;
+      });
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()));
+    }).catchError((error) {
+      return showCupertinoDialog(
+          context: context,
+          builder: (ctx) {
+            return CupertinoAlertDialog(
+              title: Text("An Error Occurred while sending email verification"),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    })
+              ],
+            );
+          });
     });
+  }
+
+  Future<void> signUp() async {
     if (_form.currentState.validate()) {
       _form.currentState.save();
+      setState(() {
+        _isLoading = true;
+      });
       try {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password)
             .then((authResult) {
-          setState(() {
-            _isLoading = false;
-          });
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => LoginScreen()));
+          verification();
         }).catchError((error) {
           setState(() {
             _isLoading = false;

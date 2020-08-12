@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,7 +10,7 @@ class OpeningScreen extends StatefulWidget {
 class _OpeningScreenState extends State<OpeningScreen> {
 //Facebook login
 
-  FacebookLogin facebookLogin = FacebookLogin();
+  // FacebookLogin facebookLogin = FacebookLogin();
 
   @override
   Widget build(BuildContext context) {
@@ -45,35 +43,36 @@ class _OpeningScreenState extends State<OpeningScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),
                           child: InkWell(
                             onTap: () {
-                              facebookLogin.logIn(['email']).then((result) {
-                                switch (result.status) {
-                                  case FacebookLoginStatus.loggedIn:
-                                    FirebaseAuth.instance
-                                        .signInWithCredential(
-                                            FacebookAuthProvider.getCredential(
-                                                accessToken:
-                                                    result.accessToken.token))
-                                        .then((signedInUser) {
-                                      print(
-                                          'Signed User is ${signedInUser.user.displayName}');
-                                      Navigator.of(context)
-                                          .pushNamedAndRemoveUntil(
-                                              '/bottombar_screen',
-                                              (Route<dynamic> route) => false);
-                                    }).catchError((e) {
-                                      print(e);
-                                    });
-                                    break;
-                                  case FacebookLoginStatus.cancelledByUser:
-                                    // TODO: Handle this case.
-                                    break;
-                                  case FacebookLoginStatus.error:
-                                    // TODO: Handle this case.
-                                    break;
-                                }
-                              }).catchError((e) {
-                                print(e);
-                              });
+                              // facebookLogin.logIn(
+                              //     ['email', ' public_profileq']).then((result) {
+                              //   switch (result.status) {
+                              //     case FacebookLoginStatus.loggedIn:
+                              //       FirebaseAuth.instance
+                              //           .signInWithCredential(
+                              //               FacebookAuthProvider.getCredential(
+                              //                   accessToken:
+                              //                       result.accessToken.token))
+                              //           .then((signedInUser) {
+                              //         print(
+                              //             'Signed User is ${signedInUser.user.displayName}');
+                              //         Navigator.of(context)
+                              //             .pushNamedAndRemoveUntil(
+                              //                 '/bottombar_screen',
+                              //                 (Route<dynamic> route) => false);
+                              //       }).catchError((e) {
+                              //         print(e);
+                              //       });
+                              //       break;
+                              //     case FacebookLoginStatus.cancelledByUser:
+                              //       // TODO: Handle this case.
+                              //       break;
+                              //     case FacebookLoginStatus.error:
+                              //       // TODO: Handle this case.
+                              //       break;
+                              //   }
+                              // }).catchError((e) {
+                              //   print(e);
+                              // });
                             },
                             child: Container(
                               height: deviceSize.height * 0.09,
