@@ -15,7 +15,14 @@ class ConfessionDetailScreen extends StatefulWidget {
 
 class _ConfessionDetailScreenState extends State<ConfessionDetailScreen> {
   final _form = GlobalKey<FormState>();
-  TextEditingController cmtcom = TextEditingController();
+  // TextEditingController cmtcom = TextEditingController();
+
+  var addingCmt = Comment(
+    userName: "Sao",
+    userProfile:
+        "https://www.johsblog.com/wp-content/uploads/2020/05/Dr-stone-151.jpg",
+    userComment: "",
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +33,22 @@ class _ConfessionDetailScreenState extends State<ConfessionDetailScreen> {
     final confession =
         Provider.of<ConfessionProvider>(context, listen: false).findById(id);
 
-    var cmt = Comment(
-      userName: "Sao",
-      userProfile:
-          "https://www.johsblog.com/wp-content/uploads/2020/05/Dr-stone-151.jpg",
-      userComment: cmtcom.text,
-    );
-    print(cmtcom.text);
-
-    void addComments() {
-      Provider.of<ConfessionProvider>(context, listen: false)
-          .addComment(id, cmt);
-    }
-
-    // void _saveForm() {
-    //   print("Save Form Here");
-    //   final isValid = _form.currentState.validate();
-    //   if (!isValid) {
-    //     return;
-    //   }
-    //   _form.currentState.save();
+    // void addComments() {
     //   Provider.of<ConfessionProvider>(context, listen: false)
     //       .addComment(id, cmt);
+    //   _form.currentState.reset();
     // }
+
+    void _saveForm() {
+      final isValid = _form.currentState.validate();
+      if (!isValid) {
+        return;
+      }
+      _form.currentState.save();
+      Provider.of<ConfessionProvider>(context, listen: false)
+          .addComment(id, addingCmt);
+      _form.currentState.reset();
+    }
 
     return Scaffold(
       backgroundColor: Color(0XFFF0EFF0),
@@ -148,16 +148,29 @@ class _ConfessionDetailScreenState extends State<ConfessionDetailScreen> {
                           child: Form(
                             key: _form,
                             child: TextFormField(
-                              controller: cmtcom,
                               autofocus: autoFocusComment,
                               decoration: new InputDecoration(
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  errorBorder: InputBorder.none,
-                                  disabledBorder: InputBorder.none,
+                                  border: OutlineInputBorder(),
+                                  // focusedBorder: InputBorder.none,
+                                  // enabledBorder: InputBorder.none,
+                                  // errorBorder: InputBorder.none,
+                                  // disabledBorder: InputBorder.none,
                                   hintText: "Write a comment...",
                                   hintStyle: TextStyle(color: Colors.grey)),
+                              onSaved: (value) {
+                                addingCmt = Comment(
+                                  userName: addingCmt.userName,
+                                  userProfile: addingCmt.userProfile,
+                                  userComment: value,
+                                );
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Enter the comment first !";
+                                }
+
+                                return null;
+                              },
                             ),
                           ),
                         ),
@@ -168,7 +181,7 @@ class _ConfessionDetailScreenState extends State<ConfessionDetailScreen> {
                             color: Color(0xffE30045),
                           ),
                           onPressed: () {
-                            addComments();
+                            _saveForm();
                           })
                     ],
                   )),
