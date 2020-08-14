@@ -1,4 +1,5 @@
 import 'package:confession/provider/confession_provider.dart';
+import 'package:confession/screens/addScreen.dart';
 import 'package:confession/screens/confession_detail_screen.dart';
 import 'package:confession/screens/home_screen.dart';
 
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
           '/opening_screen': (ctx) => OpeningScreen(),
           '/bottombar_screen': (ctx) => BottomBarScreen(),
           ResetPasswordScreen.routeName: (ctx) => ResetPasswordScreen(),
+          '/add_screen': (ctx) => AddScreen(),
         },
       ),
     );

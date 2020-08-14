@@ -47,4 +47,15 @@ class ConfessionProvider extends ChangeNotifier {
     _confession.firstWhere((confess) => confess.id == id).comment.add(comment);
     notifyListeners();
   }
+
+  void addConfession(Confession confession) {
+    final newConfession = Confession(
+        id: DateTime.now().toIso8601String(),
+        sem: confession.sem,
+        faculty: confession.faculty,
+        gender: confession.gender,
+        description: confession.description);
+    _confession.add(newConfession);
+    notifyListeners();
+  }
 }

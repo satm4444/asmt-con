@@ -40,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Confession(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, "add_screen");
+        },
         child: Icon(Icons.add),
         backgroundColor: Color(0xffE30045),
       ),
