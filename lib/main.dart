@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         title: "ASMT Confession",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.white),
-        home: HomeScreen(),
+        home: BottomBarScreen(),
         // OpeningScreen(),
         routes: {
           ConfessionDetailScreen.routeName: (ctx) => ConfessionDetailScreen(),

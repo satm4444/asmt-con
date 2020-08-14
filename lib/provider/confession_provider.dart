@@ -38,4 +38,13 @@ class ConfessionProvider extends ChangeNotifier {
   Confession findById(String id) {
     return _confession.firstWhere((confess) => confess.id == id);
   }
+
+  void addComment(String id, Comment comment) {
+    print(id);
+    print(comment.userComment);
+    print(comment.userName);
+    print(comment.userProfile);
+    _confession.firstWhere((confess) => confess.id == id).comment.add(comment);
+    notifyListeners();
+  }
 }

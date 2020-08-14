@@ -1,11 +1,22 @@
+import 'package:confession/model/comment.dart';
 import 'package:confession/provider/confession_provider.dart';
-import 'package:confession/widgets/comment.dart';
+
+import 'package:confession/widgets/commentbuilder.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ConfessionDetailScreen extends StatelessWidget {
+class ConfessionDetailScreen extends StatefulWidget {
   static const routeName = "/confession_detail_screen";
+
+  @override
+  _ConfessionDetailScreenState createState() => _ConfessionDetailScreenState();
+}
+
+class _ConfessionDetailScreenState extends State<ConfessionDetailScreen> {
+  final _form = GlobalKey<FormState>();
+  TextEditingController cmtcom = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context).settings.arguments as Map;
@@ -14,6 +25,31 @@ class ConfessionDetailScreen extends StatelessWidget {
     // print(id);
     final confession =
         Provider.of<ConfessionProvider>(context, listen: false).findById(id);
+
+    var cmt = Comment(
+      userName: "Sao",
+      userProfile:
+          "https://www.johsblog.com/wp-content/uploads/2020/05/Dr-stone-151.jpg",
+      userComment: cmtcom.text,
+    );
+    print(cmtcom.text);
+
+    void addComments() {
+      Provider.of<ConfessionProvider>(context, listen: false)
+          .addComment(id, cmt);
+    }
+
+    // void _saveForm() {
+    //   print("Save Form Here");
+    //   final isValid = _form.currentState.validate();
+    //   if (!isValid) {
+    //     return;
+    //   }
+    //   _form.currentState.save();
+    //   Provider.of<ConfessionProvider>(context, listen: false)
+    //       .addComment(id, cmt);
+    // }
+
     return Scaffold(
       backgroundColor: Color(0XFFF0EFF0),
       appBar: AppBar(
@@ -83,27 +119,15 @@ class ConfessionDetailScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Container(
-                height: 200,
-                child: ListView(
-                  children: [
-                    CommentBar(
-                      image: "assets/aax.png",
-                      username: "Anil Amatya",
-                      comment:
-                          "Very heart touching confessions, I am literally crying right now.",
+            confession.comment == null
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Container(
+                      height: 200,
+                      child: CommentBuilder(id),
                     ),
-                    CommentBar(
-                      image: "assets/icons/facebook.png",
-                      username: "Facebook Singh",
-                      comment: "I am Single and I enjoy reading confessions.",
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Container(
@@ -121,16 +145,20 @@ class ConfessionDetailScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Container(
-                          child: TextFormField(
-                            autofocus: autoFocusComment,
-                            decoration: new InputDecoration(
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                enabledBorder: InputBorder.none,
-                                errorBorder: InputBorder.none,
-                                disabledBorder: InputBorder.none,
-                                hintText: "Write a comment...",
-                                hintStyle: TextStyle(color: Colors.grey)),
+                          child: Form(
+                            key: _form,
+                            child: TextFormField(
+                              controller: cmtcom,
+                              autofocus: autoFocusComment,
+                              decoration: new InputDecoration(
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  errorBorder: InputBorder.none,
+                                  disabledBorder: InputBorder.none,
+                                  hintText: "Write a comment...",
+                                  hintStyle: TextStyle(color: Colors.grey)),
+                            ),
                           ),
                         ),
                       ),
@@ -139,7 +167,9 @@ class ConfessionDetailScreen extends StatelessWidget {
                             Icons.send,
                             color: Color(0xffE30045),
                           ),
-                          onPressed: () {})
+                          onPressed: () {
+                            addComments();
+                          })
                     ],
                   )),
             ),

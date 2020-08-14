@@ -19,7 +19,7 @@ class CommentBar extends StatelessWidget {
             child: ListTile(
               leading: CircleAvatar(
                 radius: 25,
-                backgroundImage: AssetImage(
+                backgroundImage: NetworkImage(
                   image,
                 ),
               ),
