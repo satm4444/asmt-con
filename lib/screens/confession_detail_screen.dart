@@ -1,7 +1,9 @@
 import 'package:confession/model/comment.dart';
+import 'package:confession/provider/authprovider.dart';
 import 'package:confession/provider/confession_provider.dart';
 
 import 'package:confession/widgets/commentbuilder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,16 +17,7 @@ class ConfessionDetailScreen extends StatefulWidget {
 }
 
 class _ConfessionDetailScreenState extends State<ConfessionDetailScreen> {
-  final _form = GlobalKey<FormState>();
-  // TextEditingController cmtcom = TextEditingController();
-
-  var addingCmt = Comment(
-    userName: "Sao",
-    userProfile:
-        "https://www.johsblog.com/wp-content/uploads/2020/05/Dr-stone-151.jpg",
-    userComment: "",
-  );
-
+  @override
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context).settings.arguments as Map;
@@ -32,6 +25,16 @@ class _ConfessionDetailScreenState extends State<ConfessionDetailScreen> {
     final autoFocusComment = args["autoFocusComment"];
     final confession =
         Provider.of<ConfessionProvider>(context, listen: false).findById(id);
+
+    final name = Provider.of<AuthProvider>(context, listen: false).userName;
+    final userimage = Provider.of<AuthProvider>(context, listen: false).imgUrl;
+    final _form = GlobalKey<FormState>();
+
+    var addingCmt = Comment(
+      userName: name,
+      userProfile: userimage,
+      userComment: "",
+    );
     //------Get the user Comment-----------------
     void _saveForm() {
       final isValid = _form.currentState.validate();

@@ -1,8 +1,10 @@
+import 'package:confession/provider/authprovider.dart';
 import 'package:confession/screens/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SignupScreen extends StatefulWidget {
   static const routeName = "/Signup_screen";
@@ -18,6 +20,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String _email;
   String _password;
   String _name;
+
   Future<void> verification() async {
     var user = await FirebaseAuth.instance.currentUser();
     user.sendEmailVerification().then((push) {
@@ -77,6 +80,7 @@ class _SignupScreenState extends State<SignupScreen> {
           }
           return null;
         });
+        Provider.of<AuthProvider>(context, listen: false).updateUserInfo(_name);
       } catch (error) {
         throw (error);
       }

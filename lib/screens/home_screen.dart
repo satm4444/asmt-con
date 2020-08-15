@@ -1,7 +1,9 @@
+import 'package:confession/provider/authprovider.dart';
 import 'package:confession/widgets/confession.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,6 +11,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  //--for fetching user data--//
+  void didChangeDependencies() {
+    Provider.of<AuthProvider>(context, listen: false).getUserInfo();
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Confession(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, "add_screen");
+          Navigator.pushNamed(context, "/add_screen");
         },
         child: Icon(Icons.add),
         backgroundColor: Color(0xffE30045),

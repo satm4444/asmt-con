@@ -1,11 +1,25 @@
+import 'package:confession/provider/authprovider.dart';
 import 'package:confession/widgets/profilecircle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  // void didChangeDependencies() {
+  //   Provider.of<AuthProvider>(context, listen: false).getUserInfo();
+  //   super.didChangeDependencies();
+  // }
+
   @override
   Widget build(BuildContext context) {
+    final email = Provider.of<AuthProvider>(context, listen: false).usemail;
+    final name = Provider.of<AuthProvider>(context, listen: false).usname;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,12 +43,12 @@ class ProfileScreen extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            "Satyam Rawal",
+            name,
             style: GoogleFonts.rubik(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 5),
           Text(
-            "rawalsatyam018@gmail.com",
+            email,
             style: GoogleFonts.ubuntu(
                 fontWeight: FontWeight.w500, color: Colors.grey),
           ),

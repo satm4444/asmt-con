@@ -1,3 +1,4 @@
+import 'package:confession/provider/authprovider.dart';
 import 'package:confession/provider/confession_provider.dart';
 import 'package:confession/screens/addScreen.dart';
 import 'package:confession/screens/confession_detail_screen.dart';
@@ -24,12 +25,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ConfessionProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => AuthProvider(),
+        ),
       ],
       child: MaterialApp(
         title: "ASMT Confession",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primaryColor: Colors.white),
-        home: BottomBarScreen(),
+        home: OpeningScreen(),
         // OpeningScreen(),
         routes: {
           ConfessionDetailScreen.routeName: (ctx) => ConfessionDetailScreen(),

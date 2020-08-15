@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +9,47 @@ class OpeningScreen extends StatefulWidget {
 }
 
 class _OpeningScreenState extends State<OpeningScreen> {
+  // Future<void> _facebookLogin() async {
+  //   try {
+  //     var facebookLogin = new FacebookLogin();
+  //     var result = await facebookLogin.logInWithReadPermissions(
+  //         ['email', 'public_profile', 'user_friends']);
+  //     if (result.status == FacebookLoginStatus.loggedIn) {
+  //       final AuthCredential credential = FacebookAuthProvider.getCredential(
+  //           accessToken: result.accessToken.token);
+  //       final FirebaseUser user =
+  //           (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+  //       print("signed in" + user.displayName);
+  //       return user;
+  //     }
+  //     if (result.status == FacebookLoginStatus.cancelledByUser) {
+  //       showErrorDialog('Login cancelled by the user.');
+  //     }
+  //     if (result.status == FacebookLoginStatus.error) {
+  //       showErrorDialog('Something went wrong with the login process.\n'
+  //           'Here\'s the error Facebook gave us: ${result.errorMessage}');
+  //     }
+  //   } catch (e) {
+  //     print(e.message);
+  //   }
+  // }
+
+  // void showErrorDialog(String errorDialog) {
+  //   showCupertinoDialog(
+  //       context: context,
+  //       builder: (ctx) {
+  //         return CupertinoAlertDialog(
+  //           title: Text(errorDialog),
+  //           actions: <Widget>[
+  //             CupertinoDialogAction(
+  //                 child: Text("OK"),
+  //                 onPressed: () {
+  //                   Navigator.pop(context);
+  //                 })
+  //           ],
+  //         );
+  //       });
+  // }
 //Facebook login
 
   // FacebookLogin facebookLogin = FacebookLogin();
@@ -42,38 +84,7 @@ class _OpeningScreenState extends State<OpeningScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25.0),
                           child: InkWell(
-                            onTap: () {
-                              // facebookLogin.logIn(
-                              //     ['email', ' public_profileq']).then((result) {
-                              //   switch (result.status) {
-                              //     case FacebookLoginStatus.loggedIn:
-                              //       FirebaseAuth.instance
-                              //           .signInWithCredential(
-                              //               FacebookAuthProvider.getCredential(
-                              //                   accessToken:
-                              //                       result.accessToken.token))
-                              //           .then((signedInUser) {
-                              //         print(
-                              //             'Signed User is ${signedInUser.user.displayName}');
-                              //         Navigator.of(context)
-                              //             .pushNamedAndRemoveUntil(
-                              //                 '/bottombar_screen',
-                              //                 (Route<dynamic> route) => false);
-                              //       }).catchError((e) {
-                              //         print(e);
-                              //       });
-                              //       break;
-                              //     case FacebookLoginStatus.cancelledByUser:
-                              //       //
-                              //       break;
-                              //     case FacebookLoginStatus.error:
-                              //       //
-                              //       break;
-                              //   }
-                              // }).catchError((e) {
-                              //   print(e);
-                              // });
-                            },
+                            onTap: () {},
                             child: Container(
                               height: deviceSize.height * 0.09,
                               width: deviceSize.width,
